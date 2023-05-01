@@ -62,9 +62,13 @@ public class Controller extends HttpServlet {
             product.setCountry(t.nextToken().trim());
             product.setPrice(Float.parseFloat(t.nextToken().replace('$',' ').trim()));
 
+            Integer quantity = Integer.parseInt(request.getParameter("cantidad"));
+
             cart = (Cart) session.getAttribute("cart");
             ArrayList<Product> thisCart = cart.getCart();
-            thisCart.add(product);
+            for (int i = 0; i < quantity; i++) {
+                thisCart.add(product);
+            }
             cart.setCart(thisCart);
             session.setAttribute("cart", cart);
 
