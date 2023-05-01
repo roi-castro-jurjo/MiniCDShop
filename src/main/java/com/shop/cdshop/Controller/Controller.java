@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.StringTokenizer;
 
 @WebServlet(name = "Controller", value = "/Controller")
@@ -48,12 +49,13 @@ public class Controller extends HttpServlet {
 
         if (session == null) {
             session = request.getSession(true);
-            cart.setCart(new ArrayList<Product>());
+            cart.setCart(new HashMap<Product,Integer>());
             session.setAttribute("cart", cart);
         }
         if(page.equals("index")) {
             request.getRequestDispatcher("index.jsp").forward(request, response);
         } else if (page.equals("CD-selection")) {
+            Integer isProductInHashMap = 0;
             Product product = new Product();
 
             StringTokenizer t = new StringTokenizer(request.getParameter( "title" ),"|");
@@ -63,8 +65,23 @@ public class Controller extends HttpServlet {
             product.setPrice(Float.parseFloat(t.nextToken().replace('$',' ').trim()));
 
             cart = (Cart) session.getAttribute("cart");
-            ArrayList<Product> thisCart = cart.getCart();
-            thisCart.add(product);
+            HashMap<Product,Integer> thisCart = cart.getCart();
+
+            int quantity = 0;
+            for (Product productAux : thisCart.keySet()) {
+                if (productAux.getName().equals(product.getName())){
+                    isProductInHashMap = 1;
+                    product = productAux;
+                    quantity = thisCart.get(productAux) + 1;
+                    break;
+                }
+            }
+
+            if (isProductInHashMap == 0){
+                quantity = 1;
+            }
+
+            thisCart.put(product, quantity);
             cart.setCart(thisCart);
             session.setAttribute("cart", cart);
 
@@ -73,8 +90,10 @@ public class Controller extends HttpServlet {
             request.getRequestDispatcher("cart.jsp").forward(request, response);
         } else if(page.equals("removeItem")) {
             cart = (Cart) session.getAttribute("cart");
-            ArrayList<Product> thisCart = cart.getCart();
-            for (Product product : thisCart) {
+
+            HashMap<Product,Integer> thisCart = cart.getCart();
+
+            for (Product product : thisCart.keySet()) {
                 if (product.getName().equals(request.getParameter("name"))){
                     thisCart.remove(product);
                     break;

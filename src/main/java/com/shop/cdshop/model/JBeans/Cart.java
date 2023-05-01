@@ -2,10 +2,11 @@ package com.shop.cdshop.model.JBeans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Cart implements Serializable {
     private Integer id;
-    private ArrayList<Product> cart;
+    HashMap<Product,Integer> cart;
 
     //getters & setters
     public Integer getId() {
@@ -15,10 +16,10 @@ public class Cart implements Serializable {
         this.id = id;
     }
 
-    public ArrayList<Product> getCart() {
+    public HashMap<Product,Integer> getCart() {
         return cart;
     }
-    public void setCart(ArrayList<Product> cart) {
+    public void setCart(HashMap<Product,Integer> cart) {
         this.cart = cart;
     }
 
@@ -27,6 +28,6 @@ public class Cart implements Serializable {
         return "Cart{" +
                 "id=" + id +
                 ", cart=" + cart +
-                '}';
+                "}\n\n";
     }
 }

@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <title>Home</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="css/cart.css">
 </head>
 <body>
 
@@ -26,29 +26,38 @@
 
   </c:choose>
   <table style="table-layout: fixed;width: 100%;">
+    <thead>
     <tr>
       <th>Item Name</th>
       <th>Author</th>
       <th>Country</th>
       <th>Price</th>
+      <th>Quantity</th>
       <th>Remove Item</th>
     </tr>
-
-  <c:set var="total" value="0"></c:set>
-  <c:forEach items="${cart.getCart() }" var="product" varStatus="i">
-      <c:set var="total" value="${total + product.getPrice()}"></c:set>
-
-        <tr>
-          <td style="width: 100px;"><c:out value="${product.getName()}"/></td>
-          <td style="width: 50px;"><c:out value="${product.getAuthor()}"/></td>
-          <td style="width: 100px;"><c:out value="${product.getCountry()}"/></td>
-          <td style="width: 100px;"><c:out value="${product.getPrice()}"/></td>
-          <td style="width: 100px;"><a href="Controller?page=removeItem&name=<c:out value="${product.getName()}"/>"><span class="btn btn-danger">X</span></a></td>
-        </tr>
-
-  </c:forEach>
-
+    </thead>
+    <tbody>
+    <c:set var="total" value="0"></c:set>
+    <c:forEach items="${cart.getCart()}" var="mapItem" varStatus="i">
+      <c:set var="total" value="${total + mapItem.key.getPrice() * mapItem.value}"></c:set>
+      <tr>
+        <td style="width: 100px;"><c:out value="${mapItem.key.getName()}"/></td>
+        <td style="width: 50px;"><c:out value="${mapItem.key.getAuthor()}"/></td>
+        <td style="width: 100px;"><c:out value="${mapItem.key.getCountry()}"/></td>
+        <td style="width: 100px;"><c:out value="${mapItem.key.getPrice()}"/></td>
+        <td style="width: 100px;">
+          <div class="quantity">
+            <a href="Controller?page=decreaseQuantity&name=<c:out value="${mapItem.key.getName()}"/>"><span class="btn btn-danger">-</span></a>
+            <span class="quantity-text"><c:out value="${mapItem.value}"/></span>
+            <a href="Controller?page=increaseQuantity&name=<c:out value="${mapItem.key.getName()}"/>"><span class="btn btn-success">+</span></a>
+          </div>
+        </td>
+        <td style="width: 100px;"><a href="Controller?page=removeItem&name=<c:out value="${mapItem.key.getName()}"/>"><span class="btn btn-danger">X</span></a></td>
+      </tr>
+    </c:forEach>
+    </tbody>
   </table>
+
   <c:choose>
     <c:when test="${total > 0}">
       <h4 style="margin-top: 40px;margin-bottom: 40px;">Order Total: <c:out value="${String.format(\"%.02f\", total)}"></c:out>€</h4>
