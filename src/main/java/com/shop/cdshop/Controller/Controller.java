@@ -1,9 +1,9 @@
 package com.shop.cdshop.Controller;
 
-import com.shop.cdshop.DB.DatabaseFacade;
-import com.shop.cdshop.JBeans.Cart;
-import com.shop.cdshop.JBeans.Product;
-import com.shop.cdshop.JBeans.User;
+import com.shop.cdshop.model.JBeans.Cart;
+import com.shop.cdshop.model.JBeans.Product;
+import com.shop.cdshop.model.JBeans.User;
+
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,8 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 

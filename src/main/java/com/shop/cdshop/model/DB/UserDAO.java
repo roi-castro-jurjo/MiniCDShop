@@ -1,6 +1,6 @@
-package com.shop.cdshop.DB;
+package com.shop.cdshop.model.DB;
 
-import com.shop.cdshop.JBeans.User;
+import com.shop.cdshop.model.JBeans.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
