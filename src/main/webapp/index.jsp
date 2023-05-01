@@ -40,7 +40,7 @@
         </label>
         <p>
         <div style="text-align: center;">
-            <button type="submit" value="Selecciona Producto"></button>
+            <button type="submit" value="Selecciona Producto">Añadir al carrito</button>
         </div>
     </form>
 </div>

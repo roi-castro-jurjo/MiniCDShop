@@ -1,4 +1,4 @@
-package com.model.JBeans;
+package com.shop.cdshop.JBeans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,5 +20,13 @@ public class Cart implements Serializable {
     }
     public void setCart(ArrayList<Product> cart) {
         this.cart = cart;
+    }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "id=" + id +
+                ", cart=" + cart +
+                '}';
     }
 }

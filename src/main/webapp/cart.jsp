@@ -10,32 +10,6 @@
 </head>
 <body>
 
-<c:set var="x" value="0"></c:set>
-<c:forEach items="${cartlist }" var="i">
-  <c:set var="x" value="${x+1 }"></c:set>
-</c:forEach>
-
-<header>
-  <h1>
-    Tiazon
-  </h1>
-  <nav>
-    <ul>
-      <li><a href="Controller?page=index">Home</a></li>
-      <c:choose>
-        <c:when test="${session == null}">
-          <li><a href="Controller?page=login">Login</a></li>
-          <li><a href="Controller?page=sign-up">Sign-up</a></li>
-        </c:when>
-        <c:when test="${session != null}">
-          <li><a href="Controller?page=logout" style="color: #F24638;">Logout</a></li>
-          <li><a href="#">My Account(<c:out value="${username }"></c:out>)</a></li>
-        </c:when>
-      </c:choose>
-      <li><a href="Controller?page=showcart">cart(<c:out value="${x}"/>)</a></li>
-    </ul>
-  </nav>
-</header>
 
 <div class="container">
 
@@ -51,47 +25,43 @@
     </c:otherwise>
 
   </c:choose>
-  <table>
+  <table style="table-layout: fixed;width: 100%;">
     <tr>
       <th>Item Name</th>
+      <th>Author</th>
+      <th>Country</th>
       <th>Price</th>
-      <th>Category</th>
       <th>Remove Item</th>
     </tr>
-  </table>
 
   <c:set var="total" value="0"></c:set>
-  <c:forEach items="${cartlist }" var="i">
-    <c:forEach items="${list }" var="Product">
-      <c:if test="${i == Product.getId() }">
+  <c:forEach items="${cart.getCart() }" var="product" varStatus="i">
+      <c:set var="total" value="${total + product.getPrice()}"></c:set>
 
-        <c:set var="total" value="${total + Product.getPrice() }"></c:set>
+        <tr>
+          <td style="width: 100px;"><c:out value="${product.getName()}"/></td>
+          <td style="width: 50px;"><c:out value="${product.getAuthor()}"/></td>
+          <td style="width: 100px;"><c:out value="${product.getCountry()}"/></td>
+          <td style="width: 100px;"><c:out value="${product.getPrice()}"/></td>
+          <td style="width: 100px;"><a href="Controller?page=removeItem&name=<c:out value="${product.getName()}"/>"><span class="btn btn-danger">X</span></a></td>
+        </tr>
 
-        <table style="table-layout: fixed;width: 100%;">
-          <tr>
-            <td style="width: 100px;"><img src="${Product.getImage()}" height="100" width="150" >  (<c:out value="${Product.getName()}"/>)</td>
-            <td style="width: 50px;"><c:out value="${Product.getPrice()}"/></td>
-            <td style="width: 100px;"><c:out value="${Product.getCategory()}"/></td>
-            <td style="width: 100px;"><a href="Controller?page=remove&id=<c:out value="${Product.getId()}"/>"><span class="btn btn-danger">X</span></a></td>
-          </tr>
-        </table>
-      </c:if>
-    </c:forEach>
   </c:forEach>
 
-  <h4 style="margin-top: 40px;margin-bottom: 40px;">Order Total: &#x20b9; (<c:out value="${ total}"></c:out>)</h4>
+  </table>
+  <c:choose>
+    <c:when test="${total > 0}">
+      <h4 style="margin-top: 40px;margin-bottom: 40px;">Order Total: <c:out value="${String.format(\"%.02f\", total)}"></c:out>€</h4>
+    </c:when>
+    <c:otherwise>
+      <h4 style="margin-top: 40px;margin-bottom: 40px;">Order Total: 0€</h4>
+    </c:otherwise>
+  </c:choose>
 
-  <a href="Controller?page=success"><input type="submit" value="Proceed to Checkout" class="btn btn-success" style="width:100%;padding:8px;font-size:16px;"></a><br>
+  <a href="Controller?page=checkout"><input type="submit" value="Proceed to Checkout" class="btn btn-success" style="width:100%;padding:8px;font-size:16px;"></a><br>
   <a href="Controller?page=index"><input type="button" value="Continue Shopping" class="btn btn-warning" style="width:100%;padding:8px;font-size:16px;"></a>
 
 
 </div>
-
-<footer style="margin-top: 40px;">
-  <div class="footer"> &copy; 2018 Copyright:
-    <a href="Controller?page=index"> Tiazon.com</a>
-  </div>
-</footer>
-
 </body>
 </html>
