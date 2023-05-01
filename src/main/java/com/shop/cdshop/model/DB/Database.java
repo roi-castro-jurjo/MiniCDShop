@@ -1,4 +1,4 @@
-package com.shop.cdshop.DB;
+package com.shop.cdshop.model.DB;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -6,16 +6,16 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class DatabaseFacade {
+public class Database {
     private final Connection connection;
 
-    public DatabaseFacade() throws IOException, SQLException, ClassNotFoundException {
+    public Database() throws IOException, SQLException, ClassNotFoundException {
         Class.forName("org.postgresql.Driver");
 
         Properties configuracion = new Properties();
         FileInputStream configFile;
 
-        configFile = new FileInputStream("/Users/aaronblancolopez/IdeaProjects/CDShop/database.properties");
+        configFile = new FileInputStream("/Users/aaronblancolopez/IdeaProjects/AhoraSi/database.properties");
         configuracion.load(configFile);
         configFile.close();
 
@@ -31,6 +31,10 @@ public class DatabaseFacade {
                         + configuracion.getProperty("puerto") + "/"
                         + configuracion.getProperty("baseDatos"),
                 usuario);
+    }
+
+    public void closeConnection() throws SQLException {
+        this.connection.close();
     }
 
     public Connection getConnection() {

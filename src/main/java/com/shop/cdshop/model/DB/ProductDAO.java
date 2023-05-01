@@ -1,4 +1,4 @@
-package com.shop.cdshop.DB;
+package com.shop.cdshop.model.DB;
 
 import java.sql.Connection;
 

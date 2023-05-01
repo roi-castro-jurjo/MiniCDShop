@@ -30,14 +30,14 @@
     </div>
     <div class="signup-group">
         <label>Email</label>
-        <input type="text" name="username" placeholder="Your Email">
+        <input type="text" name="email" placeholder="Your Email">
     </div>
     <div class="signup-group">
-        <label>Username</label>
+        <label>Card Type</label>
         <input type="text" name="cardType" placeholder="Your Card Type">
     </div>
     <div class="signup-group">
-        <label>Username</label>
+        <label>Card Number</label>
         <input type="text" name="cardNumber" placeholder="Your card number">
     </div>
     <div class="signup-group">
