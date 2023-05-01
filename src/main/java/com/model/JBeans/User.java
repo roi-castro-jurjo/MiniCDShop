@@ -1,4 +1,4 @@
-package com.shop.cdshop.JBeans;
+package com.model.JBeans;
 
 import java.io.Serializable;
 

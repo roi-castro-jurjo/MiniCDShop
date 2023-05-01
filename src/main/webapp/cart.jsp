@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<c:set var="x" value="0"> bh</c:set>
+<c:set var="x" value="0"></c:set>
 <c:forEach items="${cartlist }" var="i">
   <c:set var="x" value="${x+1 }"></c:set>
 </c:forEach>

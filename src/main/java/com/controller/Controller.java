@@ -1,7 +1,7 @@
-package com.shop.cdshop.Controller;
+package com.controller;
 
-import com.shop.cdshop.DB.DatabaseFacade;
-import com.shop.cdshop.JBeans.Cart;
+import com.model.DB.DatabaseFacade;
+import com.model.JBeans.Cart;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -47,7 +47,6 @@ public class Controller extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String page = request.getParameter("page");
         if (page.equals("CD-selection")) {
-
             System.out.println("funciona");
             request.getRequestDispatcher("cart.jsp").forward(request, response);
         }
