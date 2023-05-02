@@ -46,7 +46,7 @@
         <td style="width: 100px;"><c:out value="${mapItem.key.getCountry()}"/></td>
         <td style="width: 100px;"><c:out value="${mapItem.key.getPrice()}"/></td>
         <td style="width: 100px;">
-          <div class="quantity">
+          <div>
             <a href="Controller?page=decreaseQuantity&name=<c:out value="${mapItem.key.getName()}"/>"><span class="btn btn-danger">-</span></a>
             <span class="quantity-text"><c:out value="${mapItem.value}"/></span>
             <a href="Controller?page=increaseQuantity&name=<c:out value="${mapItem.key.getName()}"/>"><span class="btn btn-success">+</span></a>

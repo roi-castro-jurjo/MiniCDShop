@@ -1,52 +1,38 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="ISO-8859-1"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="ISO-8859-1">
-    <title>Login page</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/login.css">
+    <title>Sign up - Music</title>
 </head>
 <body>
-
-<div class="signup-header">
-    <h2>Login to <mark>Tiazon</mark></h2>
+<div class="main-container">
+    <div class="form-container">
+        <div class="form-header">
+            <div class="logo-container">
+                <a href="Controller?page=index"><img src="assets/images/logo.png" alt="app logo"></a>
+            </div>
+            <div class="text-container">
+                <a href="Controller?page=index"><p>.music</p></a>
+            </div>
+        </div>
+        <form class="form-prueba" id="sample-form" method="post" action="Controller">
+            <div class = "form-group">
+                <input type="hidden" name="page" value="login-credentials">
+                <fieldset class="fldst1">
+                    <label for="email">Email<input id="email" type="text"  name="email" required></label>
+                    <label for="password">Password<input id="password" type="password"  maxlength="20" name="password" required></label>
+                </fieldset>
+                <div class="submit-button-container">
+                    <button class="submit-button" type="submit">Log in</button>
+                </div>
+                <div class = "no-account">
+                    <p>New costumer? <a href="Controller?page=signup">Sign Up!</a></p>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
-
-<form method="post" action="Controller">
-
-    <input type="hidden" name="page" value="login-credentials">
-
-    <!-- Validations errors -->
-    <font color="#F24638"><c:out value="${msg }"></c:out></font>
-
-    <div class="signup-group">
-        <label>Username</label>
-        <input type="text" name="username" placeholder="Your Username">
-    </div>
-    <div class="signup-group">
-        <label>Password</label>
-        <input type="password" name="password" placeholder="Enter password">
-    </div>
-    <div class="signup-group">
-        <label>Email</label>
-        <input type="text" name="email" placeholder="Your Email">
-    </div>
-    <div class="signup-group">
-        <label>Card Type</label>
-        <input type="text" name="cardType" placeholder="Your Card Type">
-    </div>
-    <div class="signup-group">
-        <label>Card Number</label>
-        <input type="text" name="cardNumber" placeholder="Your card number">
-    </div>
-    <div class="signup-group">
-        <button type="submit" name="login" class="signup-btn">Log in</button>
-    </div>
-    <p>
-        New to Tiazon? <a href="Controller?page=sign-up" style="color:#F24638;">Create Account</a>
-    </p>
-</form>
-
 </body>
 </html>

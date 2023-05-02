@@ -8,7 +8,7 @@ public class User implements Serializable {
     private String email;
     private String password;
     private String cardType;
-    private Integer cardNumber;
+    private Long cardNumber;
     private Cart cart;
 
     //getters & setters
@@ -47,10 +47,10 @@ public class User implements Serializable {
         this.cardType = cardType;
     }
 
-    public Integer getCardNumber() {
+    public Long getCardNumber() {
         return cardNumber;
     }
-    public void setCardNumber(Integer cardNumber) {
+    public void setCardNumber(Long cardNumber) {
         this.cardNumber = cardNumber;
     }
 

@@ -4,19 +4,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Musica para DAA</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/header.css">
+    <title>Music</title>
 </head>
-<body style="background-color: #FDF5E6">
-<table align="center" border="0">
-    <tr>
-        <th><img src="" ALIGN="CENTER" alt="imagen"></th>
-        <th><font face="Times New Roman,Times" size="+3">Música para DAA</font></th>
-        <th><img SRC="" ALIGN="CENTER" alt="imagen"></th>
-    </tr>
-</table>
-<hr>
-<p>
-<div style="text-align: center;">
+<body>
+<div id="header" style ="min-height: 105px;"></div>
+<div class = "form-container">
     <form action="Controller" method="post">
         <input type="hidden" name="page" value="CD-selection">
         <b>CD:</b>
@@ -44,6 +40,7 @@
         </div>
     </form>
 </div>
-<hr>
 </body>
+
+<script src = "js/header-loader.js"></script>
 </html>

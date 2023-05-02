@@ -1,7 +1,6 @@
 package com.shop.cdshop.model.JBeans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Cart implements Serializable {
