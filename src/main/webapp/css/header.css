@@ -13,6 +13,13 @@
     transition-property:transform;
 }
 
+.navbar-text {
+    display:inline-block;
+    backface-visibility: hidden;
+    vertical-align: middle;
+    position:relative;
+}
+
 .hoverable:before{
     position:absolute;
     pointer-events: none;
@@ -124,4 +131,16 @@ nav li a {
 
 .header-user {
     color: white;
+}
+
+.manage-account {
+    margin: 0;
+    padding: 0;
+}
+
+.account-manage {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }

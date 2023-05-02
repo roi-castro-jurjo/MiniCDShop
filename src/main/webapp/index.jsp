@@ -12,6 +12,7 @@
 </head>
 <body>
 <div id="header" style ="min-height: 105px;"></div>
+<script src = "js/header-loader.js"></script>
 <div class = "form-container">
     <form action="Controller" method="post">
         <input type="hidden" name="page" value="CD-selection">
@@ -42,5 +43,4 @@
 </div>
 </body>
 
-<script src = "js/header-loader.js"></script>
 </html>
