@@ -14,13 +14,13 @@
             <div class="nav_item account-manage">
                 <ul class="nav-item">
                     <c:choose>
-                        <c:when test="${session == null}">
+                        <c:when test="${username == null}">
                             <li class="navbar-text hoverable manage-account"><a class="nav-link" href="Controller?page=login">Login</a></li>
                             <li class="navbar-text manage-account"> / </li>
                             <li class="navbar-text hoverable manage-account"><a class="nav-link" href="Controller?page=sign-up">Sign-up</a></li>
                         </c:when>
                         <c:otherwise>
-                            <li class="navbar-text hoverable manage-account"><a class="nav-link" href="#">My Account(<c:out value="${username }"></c:out>)</a></li>
+                            <li class="navbar-text hoverable manage-account"><a class="nav-link" href="#"><c:out value="${username}"></c:out></a></li>
                         </c:otherwise>
                     </c:choose>
                 </ul>
