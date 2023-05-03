@@ -17,7 +17,7 @@ public class UserDAO extends DAO {
         Connection connection = this.getConexion();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * " +
-                    "FROM \"User\" as u " +
+                    "FROM \"users\" as u " +
                     "WHERE u.email = ? and u.password = ?");
             preparedStatement.setString(1, user.getEmail());
             preparedStatement.setString(2, user.getPassword());
@@ -38,7 +38,7 @@ public class UserDAO extends DAO {
         Connection connection = this.getConexion();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT name " +
-                    "FROM \"User\" as u " +
+                    "FROM \"users\" as u " +
                     "WHERE u.email = ?");
             preparedStatement.setString(1, email);
             ResultSet result = preparedStatement.executeQuery();
@@ -52,14 +52,26 @@ public class UserDAO extends DAO {
     public void signup(User user) {
         Connection connection = this.getConexion();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO \"User\" (name,password,email,cardtype,cardnumber) VALUES(?,?,?,?,?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO \"users\" (name,password,email) VALUES(?,?,?)");
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getEmail());
-            preparedStatement.setString(4, user.getCardType());
-            preparedStatement.setLong(5, user.getCardNumber());
-
             preparedStatement.executeUpdate();
+
+            preparedStatement = connection.prepareStatement("SELECT id " +
+                    "FROM \"users\" as u " +
+                    "WHERE u.name = ? AND u.password = ?");
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getPassword());
+            ResultSet result = preparedStatement.executeQuery();
+            result.next();
+
+            preparedStatement = connection.prepareStatement("INSERT INTO \"cards\" (user_id, card_type, number) VALUES (?,?,?)");
+            preparedStatement.setInt(1, result.getInt(1));
+            preparedStatement.setString(2, user.getCardType());
+            preparedStatement.setLong(3, user.getCardNumber());
+            preparedStatement.executeUpdate();
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

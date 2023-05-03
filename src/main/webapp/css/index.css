@@ -1,0 +1,29 @@
+
+
+body {
+    background-color: black;
+    color: white;
+}
+
+.text-center {
+    color: white;
+}
+
+.card {
+    background-color: black;
+    border: white solid 2px;
+    border-radius: 0;
+}
+
+.card-img-top {
+    background-color: black;
+    border: white solid 2px;
+    border-radius: 0;
+}
+
+.btn {
+    background-color: black;
+    color: white;
+    border: white solid 2px;
+    border-radius: 0;
+}

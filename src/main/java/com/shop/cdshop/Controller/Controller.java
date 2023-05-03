@@ -1,6 +1,7 @@
 package com.shop.cdshop.Controller;
 
 import com.shop.cdshop.model.DB.Database;
+import com.shop.cdshop.model.DB.ProductDAO;
 import com.shop.cdshop.model.DB.UserDAO;
 import com.shop.cdshop.model.JBeans.Cart;
 import com.shop.cdshop.model.JBeans.Product;
@@ -15,6 +16,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
@@ -30,12 +32,23 @@ public class Controller extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(request.getParameter("showProducts") != null && request.getParameter("showProducts").equals("true")){
+            try {
+                Database database = new Database();
+                ProductDAO productDAO = new ProductDAO(database.getConnection());
+                ArrayList<Product> allProducts= productDAO.getAllProducts();
+                session = request.getSession(true);
+                session.setAttribute("products", allProducts);
+            } catch (SQLException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         String page = request.getParameter("page");
         if(page == null || page.equals("index")) {
 
             session = request.getSession(true);
             session.setAttribute("cart", cart);
-
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }else {
             doPost(request, response);
