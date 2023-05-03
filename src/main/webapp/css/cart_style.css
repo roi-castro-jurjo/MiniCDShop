@@ -1,0 +1,25 @@
+body {
+    background-color: black;
+    color: white;
+}
+
+.btn {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 0;
+}
+
+table, th, tr, td {
+    border: white double 2px;
+    border-radius: 0;
+}
+
+td, th {
+    text-align: center;
+}
+table {
+    margin-top: 50px;
+    width: 100%;
+
+}

@@ -246,11 +246,14 @@ public class Controller extends HttpServlet {
                 throw new RuntimeException(e);
             }
 
+
+            request.getRequestDispatcher("resume.jsp").forward(request, response);
+
+        } else if (page.equals("resume")) {
+
             cart = new Cart();
             session.setAttribute("cart", cart);
-
             request.getRequestDispatcher("index.jsp").forward(request, response);
-
         }
     }
 }

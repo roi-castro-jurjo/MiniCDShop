@@ -62,7 +62,7 @@
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 
                         <div class="text-center">
-                            <a class="btn mt-auto" href="Controller?page=proccess-order">Pay & Exit</a>
+                            <a class="btn mt-auto" href="Controller?page=proccess-order">Payt</a>
                         </div>
 
                     </div>

@@ -6,8 +6,8 @@
   <meta charset="UTF-8">
   <title>Home</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="css/cart.css">
   <link rel="stylesheet" type="text/css" href="css/header.css">
+  <link rel="stylesheet" type="text/css" href="css/cart_style.css">
 </head>
 <body>
 
@@ -45,7 +45,7 @@
 
 <div class="container">
 
-  <table style="table-layout: fixed;width: 100%;">
+  <table>
     <thead>
     <tr>
       <th>Item Name</th>
@@ -67,12 +67,12 @@
         <td style="width: 100px;"><c:out value="${mapItem.key.getPrice()}"/></td>
         <td style="width: 100px;">
           <div>
-            <a href="Controller?page=decreaseQuantity&name=<c:out value="${mapItem.key.getName()}"/>"><span class="btn btn-danger">-</span></a>
+            <a href="Controller?page=decreaseQuantity&name=<c:out value="${mapItem.key.getName()}"/>"><span class="btn ">-</span></a>
             <span class="quantity-text"><c:out value="${mapItem.value}"/></span>
-            <a href="Controller?page=increaseQuantity&name=<c:out value="${mapItem.key.getName()}"/>"><span class="btn btn-success">+</span></a>
+            <a href="Controller?page=increaseQuantity&name=<c:out value="${mapItem.key.getName()}"/>"><span class="btn ">+</span></a>
           </div>
         </td>
-        <td style="width: 100px;"><a href="Controller?page=removeItem&name=<c:out value="${mapItem.key.getName()}"/>"><span class="btn btn-danger">X</span></a></td>
+        <td style="width: 100px;"><a href="Controller?page=removeItem&name=<c:out value="${mapItem.key.getName()}"/>"><span class="btn ">X</span></a></td>
       </tr>
     </c:forEach>
     </tbody>
