@@ -5,26 +5,46 @@
 <head>
   <meta charset="UTF-8">
   <title>Home</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="css/cart.css">
+  <link rel="stylesheet" type="text/css" href="css/header.css">
 </head>
 <body>
 
+<header>
+  <nav class="navbar navbar-expand-sm navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand nav-item" href="Controller?page=index">
+        <img src="assets/images/logo.png" alt="Logo" width="80px" height="80px" class="d-inline-block">
+        .music
+      </a>
+      <ul class="nav-item">
+        <li class="navbar-text hoverable"><a class="nav-link" href="Controller?page=index">HOME</a></li>
+        <li class="navbar-text hoverable"><a class="nav-link" href="Controller?page=cart">CART</a></li>
+      </ul>
+      <div class="nav_item account-manage">
+        <ul class="nav-item">
+          <c:choose>
+            <c:when test="${username == null}">
+              <li class="navbar-text hoverable manage-account"><a class="nav-link" href="Controller?page=login">Login</a></li>
+              <li class="navbar-text manage-account"> / </li>
+              <li class="navbar-text hoverable manage-account"><a class="nav-link" href="Controller?page=signup">Sign-up</a></li>
+            </c:when>
+            <c:otherwise>
+              <li class="navbar-text hoverable manage-account"><a class="nav-link" href="#"><c:out value="${username}"></c:out></a></li>
+            </c:otherwise>
+          </c:choose>
+        </ul>
+        <a href="Controller?page=login" class="profile-link">
+          <img src="assets/images/user.png" width="50px" height="50px" alt="notificaciones">
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
 
 <div class="container">
 
-  <c:choose>
-    <c:when test="${x == 1}">
-      <h4 style="margin-top: 40px;">My shopping bag(<c:out value="${x}"/> item)</h4>
-    </c:when>
-    <c:when test="${x > 1}">
-      <h4 style="margin-top: 40px;">My shopping bag(<c:out value="${x}"/> items)</h4>
-    </c:when>
-    <c:otherwise >
-      <h4 style="margin-top: 40px;">Your Shopping Bag is Empty</h4>
-    </c:otherwise>
-
-  </c:choose>
   <table style="table-layout: fixed;width: 100%;">
     <thead>
     <tr>

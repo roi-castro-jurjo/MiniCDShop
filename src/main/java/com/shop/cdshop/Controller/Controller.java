@@ -1,6 +1,7 @@
 package com.shop.cdshop.Controller;
 
 import com.shop.cdshop.model.DB.Database;
+import com.shop.cdshop.model.DB.OrderDAO;
 import com.shop.cdshop.model.DB.ProductDAO;
 import com.shop.cdshop.model.DB.UserDAO;
 import com.shop.cdshop.model.JBeans.Cart;
@@ -15,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +25,7 @@ import java.util.StringTokenizer;
 @WebServlet(name = "Controller", value = "/Controller")
 public class Controller extends HttpServlet {
     static Cart cart = new Cart();
+    static HashMap<Product, Integer> products;
     HttpSession session;
 
     @Override
@@ -32,13 +35,21 @@ public class Controller extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (session == null) {
+            session = request.getSession(true);
+            cart.setCart(new HashMap<>());
+            session.setAttribute("cart", cart);
+            products = new HashMap<>();
+        }
+
         if(request.getParameter("showProducts") != null && request.getParameter("showProducts").equals("true")){
             try {
                 Database database = new Database();
                 ProductDAO productDAO = new ProductDAO(database.getConnection());
-                ArrayList<Product> allProducts= productDAO.getAllProducts();
+                HashMap<Product, Integer> allProducts = productDAO.getAllProducts();
                 session = request.getSession(true);
                 session.setAttribute("products", allProducts);
+                products = allProducts;
             } catch (SQLException | ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
@@ -63,6 +74,7 @@ public class Controller extends HttpServlet {
             session = request.getSession(true);
             cart.setCart(new HashMap<>());
             session.setAttribute("cart", cart);
+            products = new HashMap<>();
         }
         if(page.equals("index")) {
             request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -70,16 +82,19 @@ public class Controller extends HttpServlet {
             int isProductInHashMap = 0;
             Product product = new Product();
 
-            StringTokenizer t = new StringTokenizer(request.getParameter( "title" ),"|");
-            product.setName(t.nextToken().trim());
-            product.setAuthor(t.nextToken().trim());
-            product.setCountry(t.nextToken().trim());
-            product.setPrice(Float.parseFloat(t.nextToken().replace('$',' ').trim()));
+            try {
+                Database database = new Database();
+                ProductDAO productDAO = new ProductDAO(database.getConnection());
+                product = productDAO.fetchProduct(request.getParameter("name"));
+            } catch (SQLException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
 
             cart = (Cart) session.getAttribute("cart");
             HashMap<Product,Integer> thisCart = cart.getCart();
 
-            int quantity = Integer.parseInt(request.getParameter("cantidad"));
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
 
             for (Product productAux : thisCart.keySet()) {
                 if (productAux.getName().equals(product.getName())){
@@ -194,6 +209,48 @@ public class Controller extends HttpServlet {
 
             session.setAttribute("username", user.getName());
             request.getRequestDispatcher("index.jsp").forward(request, response);
+        } else if (page.equals("cart")){
+            request.getRequestDispatcher("cart.jsp").forward(request, response);
+        } else if (page.equals("decreaseQuantityIndex")){
+           products = (HashMap<Product, Integer>) session.getAttribute("products");
+
+            for (Product product : products.keySet()) {
+                if (product.getName().equals(request.getParameter("name"))){
+                    if (products.get(product) > 1) {
+                        products.put(product, products.get(product) - 1);
+                    }
+                    break;
+                }
+            }
+            session.setAttribute("products", products);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        } else if (page.equals("increaseQuantityIndex")){
+            products = (HashMap<Product, Integer>) session.getAttribute("products");
+
+            for (Product product : products.keySet()) {
+                if (product.getName().equals(request.getParameter("name"))){
+                    products.put(product, products.get(product) + 1);
+                    break;
+                }
+            }
+            session.setAttribute("products", products);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        } else if (page.equals("proccess-order")) {
+            cart = (Cart) session.getAttribute("cart");
+
+            try {
+                Database database = new Database();
+                OrderDAO orderDAO = new OrderDAO(database.getConnection());
+                orderDAO.saveOrder(cart, (String) session.getAttribute("username"));
+            } catch (SQLException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
+            cart = new Cart();
+            session.setAttribute("cart", cart);
+
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+
         }
     }
 }
