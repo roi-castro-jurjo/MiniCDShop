@@ -15,7 +15,7 @@ public class Database {
         Properties configuracion = new Properties();
         FileInputStream configFile;
 
-        configFile = new FileInputStream("C:\\Users\\Roi Castro\\Desktop\\Work\\Projects\\DAW\\MiniCDShop\\database.properties");
+        configFile = new FileInputStream("/Users/aaronblancolopez/IdeaProjects/AhoraSi/database.properties");
         configuracion.load(configFile);
         configFile.close();
 

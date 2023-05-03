@@ -21,6 +21,11 @@
             <div class = "form-group">
                 <input type="hidden" name="page" value="login-credentials">
                 <fieldset class="fldst1">
+                    <c:choose>
+                        <c:when test="${badLogin != null}">
+                            <p style="color: red; font-size: 0.8em; height: 0.8em; margin-top: 0; text-decoration: underline"><c:out value="${badLogin}"></c:out></p>
+                        </c:when>
+                    </c:choose>
                     <label for="email">Email<input id="email" type="text"  name="email" required></label>
                     <label for="password">Password<input id="password" type="password"  maxlength="20" name="password" required></label>
                 </fieldset>

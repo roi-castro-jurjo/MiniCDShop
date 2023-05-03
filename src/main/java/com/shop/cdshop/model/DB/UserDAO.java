@@ -21,7 +21,6 @@ public class UserDAO extends DAO {
                     "WHERE u.email = ? and u.password = ?");
             preparedStatement.setString(1, user.getEmail());
             preparedStatement.setString(2, user.getPassword());
-
             ResultSet result = preparedStatement.executeQuery();
             if (!result.next()) {
                 System.out.println("El usuario no existe.");
@@ -57,7 +56,6 @@ public class UserDAO extends DAO {
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getEmail());
             preparedStatement.executeUpdate();
-
             preparedStatement = connection.prepareStatement("SELECT id " +
                     "FROM \"users\" as u " +
                     "WHERE u.name = ? AND u.password = ?");
@@ -65,13 +63,11 @@ public class UserDAO extends DAO {
             preparedStatement.setString(2, user.getPassword());
             ResultSet result = preparedStatement.executeQuery();
             result.next();
-
             preparedStatement = connection.prepareStatement("INSERT INTO \"cards\" (user_id, card_type, number) VALUES (?,?,?)");
             preparedStatement.setInt(1, result.getInt(1));
             preparedStatement.setString(2, user.getCardType());
             preparedStatement.setLong(3, user.getCardNumber());
             preparedStatement.executeUpdate();
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

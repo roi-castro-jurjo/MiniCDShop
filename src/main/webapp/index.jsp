@@ -12,6 +12,7 @@
     <title>.music</title>
 </head>
 <body>
+<c:set var="items" value="${cart.getCart().keySet().size()}"></c:set>
 <header>
     <nav class="navbar navbar-expand-sm navbar-dark">
         <div class="container-fluid">
@@ -21,7 +22,14 @@
             </a>
             <ul class="nav-item">
                 <li class="navbar-text hoverable"><a class="nav-link" href="Controller?page=index">HOME</a></li>
-                <li class="navbar-text hoverable"><a class="nav-link" href="Controller?page=cart">CART</a></li>
+                <c:choose>
+                    <c:when test="${items >= 1}">
+                        <li class="navbar-text hoverable"><a class="nav-link" href="Controller?page=cart">CART (<c:out value="${items}"></c:out>)</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="navbar-text hoverable"><a class="nav-link" href="Controller?page=cart">CART</a></li>
+                    </c:otherwise>
+                </c:choose>
             </ul>
             <div class="nav_item account-manage">
                 <ul class="nav-item">
@@ -52,7 +60,6 @@
                     <c:forEach items="${products}" var="productItem">
                         <div class="col mb-5">
                             <div class="card h-100">
-                                <img class="card-img-top" src="" alt="<c:out value="${productItem.key.getName()}"></c:out>">
                                 <div class="card-body p-4">
                                     <div class="text-center">
                                         <h5 class="fw-bolder"><c:out value="${productItem.key.getName()}"></c:out></h5><c:out value="${productItem.key.getPrice()}"></c:out>€
@@ -72,7 +79,6 @@
                     </c:forEach>
                 </c:when>
                 <c:otherwise>
-
                     <div class="col mb-5">
                         <div class="card h-100">
                             <div class="card-body p-4">
@@ -93,7 +99,6 @@
                 </c:otherwise>
             </c:choose>
         </div>
-
     </div>
 </section>
 </body>

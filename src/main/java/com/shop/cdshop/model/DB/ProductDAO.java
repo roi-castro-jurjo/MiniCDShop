@@ -19,23 +19,17 @@ public class ProductDAO extends DAO{
         Connection connection = this.getConexion();
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT *" +
                 "FROM \"products\" ");
-
         ResultSet result = preparedStatement.executeQuery();
-
         HashMap<Product,Integer> products = new HashMap<>();
-
         while(result.next()){
             Product product = new Product();
             product.setName(result.getString("name"));
             product.setAuthor(result.getString("author"));
             product.setCountry(result.getString("country"));
             product.setPrice(result.getFloat("price"));
-
             products.put(product, 1);
         }
-
         return products;
-
     }
 
     public Product fetchProduct(String title) throws SQLException {
@@ -43,21 +37,15 @@ public class ProductDAO extends DAO{
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT *" +
                 "FROM \"products\" " +
                 "WHERE name = ?");
-
         preparedStatement.setString(1, title);
-
         ResultSet result = preparedStatement.executeQuery();
-
         Product product  = new Product();
-
         result.next();
-
         product.setId(result.getInt("id"));
         product.setName(result.getString("name"));
         product.setAuthor(result.getString("author"));
         product.setCountry(result.getString("country"));
         product.setPrice(result.getFloat("price"));
-
         return product;
     }
 }
