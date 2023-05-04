@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class Cart implements Serializable {
     private Integer id;
-    HashMap<Product,Integer> cart;
+    private HashMap<Product,Integer> cart;
 
     //getters & setters
     public Integer getId() {

@@ -10,45 +10,45 @@
     <link rel="stylesheet" type="text/css" href="css/cart_style.css">
   </head>
   <body>
-    <c:set var="items" value="${cart.getCart().keySet().size()}"></c:set>
-    <header>
+  <c:set var="items" value="${cart.getCart().keySet().size()}"></c:set>
+  <header>
       <nav class="navbar navbar-expand-sm navbar-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand nav-item" href="Controller?page=index">
-            <img src="assets/images/logo.png" alt="Logo" width="80px" height="80px" class="d-inline-block">
-            .music
-          </a>
-          <ul class="nav-item">
-            <li class="navbar-text hoverable"><a class="nav-link" href="Controller?page=index">HOME</a></li>
-            <c:choose>
-              <c:when test="${items < 1}">
-                <li class="navbar-text hoverable"><a class="nav-link" href="Controller?page=cart">CART</a></li>
-              </c:when>
-              <c:otherwise>
-                <li class="navbar-text hoverable"><a class="nav-link" href="Controller?page=cart">CART (<c:out value="${items}"></c:out>)</a></li>
-              </c:otherwise>
-            </c:choose>
-          </ul>
-          <div class="nav_item account-manage">
-            <ul class="nav-item">
-              <c:choose>
-                <c:when test="${username == null}">
-                  <li class="navbar-text hoverable manage-account"><a class="nav-link" href="Controller?page=login">Login</a></li>
-                  <li class="navbar-text manage-account"> / </li>
-                  <li class="navbar-text hoverable manage-account"><a class="nav-link" href="Controller?page=signup">Sign-up</a></li>
-                </c:when>
-                <c:otherwise>
-                  <li class="navbar-text hoverable manage-account"><a class="nav-link" href="#"><c:out value="${username}"></c:out></a></li>
-                </c:otherwise>
-              </c:choose>
-            </ul>
-            <a href="Controller?page=login" class="profile-link">
-              <img src="assets/images/user.png" width="50px" height="50px" alt="notificaciones">
-            </a>
+          <div class="container-fluid">
+              <a class="navbar-brand nav-item" href="Controller?page=index">
+                  <img src="assets/images/logo.png" alt="Logo" width="80px" height="80px" class="d-inline-block">
+                  .music
+              </a>
+              <ul class="nav-item">
+                  <li class="navbar-text hoverable"><a class="nav-link" href="Controller?page=index">HOME</a></li>
+                  <c:choose>
+                      <c:when test="${items >= 1}">
+                          <li class="navbar-text hoverable"><a class="nav-link" href="Controller?page=cart">CART (<c:out value="${items}"></c:out>)</a></li>
+                      </c:when>
+                      <c:otherwise>
+                          <li class="navbar-text hoverable"><a class="nav-link" href="Controller?page=cart">CART</a></li>
+                      </c:otherwise>
+                  </c:choose>
+              </ul>
+              <div class="nav_item account-manage">
+                  <ul class="nav-item">
+                      <c:choose>
+                          <c:when test="${username == null}">
+                              <li class="navbar-text hoverable manage-account"><a class="nav-link" href="Controller?page=login">Login</a></li>
+                              <li class="navbar-text manage-account"> / </li>
+                              <li class="navbar-text hoverable manage-account"><a class="nav-link" href="Controller?page=signup">Sign-up</a></li>
+                          </c:when>
+                          <c:otherwise>
+                              <li class="navbar-text hoverable manage-account"><a class="nav-link" href="#"><c:out value="${username}"></c:out></a></li>
+                          </c:otherwise>
+                      </c:choose>
+                  </ul>
+                  <a href="Controller?page=login" class="profile-link">
+                      <img src="assets/images/user.png" width="50px" height="50px" alt="notificaciones">
+                  </a>
+              </div>
           </div>
-        </div>
       </nav>
-    </header>
+  </header>
     <div class="container">
       <c:choose>
         <c:when test="${items > 0}">

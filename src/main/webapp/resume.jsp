@@ -10,6 +10,31 @@
   <link rel="stylesheet" type="text/css" href="css/cart_style.css">
 </head>
 <body>
+
+<c:set var="items" value="${cart.getCart().keySet().size()}"></c:set>
+<header>
+  <nav class="navbar navbar-expand-sm navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand nav-item" href="Controller?page=resume">
+        <img src="assets/images/logo.png" alt="Logo" width="80px" height="80px" class="d-inline-block">
+        .music
+      </a>
+      <ul class="nav-item">
+        <li class="navbar-text hoverable"><a class="nav-link" href="Controller?page=resume">HOME</a></li>
+        <li class="navbar-text hoverable"><a class="nav-link" href="Controller?page=cart-resume">CART</a></li>
+      </ul>
+      <div class="nav_item account-manage">
+        <ul class="nav-item">
+            <li class="navbar-text hoverable manage-account"><a class="nav-link" href="#"><c:out value="${username}"></c:out></a></li>
+        </ul>
+        <a href="#" class="profile-link">
+          <img src="assets/images/user.png" width="50px" height="50px" alt="notificaciones">
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
 <c:set var="items" value="${cart.getCart().keySet().size()}"></c:set>
 <div class="container">
   <c:choose>
@@ -48,12 +73,7 @@
       <h4 style="margin-top: 40px;margin-bottom: 40px;">Order Total: 0€</h4>
     </c:otherwise>
   </c:choose>
-  <c:choose>
-    <c:when test="${items > 0}">
-      <a href="Controller?page=checkout"><input type="submit" value="Proceed to Checkout" class="btn btn-success" style="width:100%;padding:8px;font-size:16px;"></a><br>
-    </c:when>
-  </c:choose>
-  <a href="Controller?page=index"><input type="button" value="Continue Shopping" class="btn btn-warning" style="width:100%;padding:8px;font-size:16px;"></a>
+  <a href="Controller?page=resume"><input type="button" value="Continue Shopping" class="btn btn-warning" style="width:100%;padding:8px;font-size:16px;"></a>
 </div>
 </body>
 </html>

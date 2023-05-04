@@ -230,8 +230,14 @@ public class Controller extends HttpServlet {
             request.getRequestDispatcher("resume.jsp").forward(request, response);
         } else if (page.equals("resume")) {
             cart = new Cart();
+            cart.setCart(new HashMap<>());
             session.setAttribute("cart", cart);
             request.getRequestDispatcher("index.jsp").forward(request, response);
+        } else if (page.equals("cart-resume")){
+            cart = new Cart();
+            cart.setCart(new HashMap<>());
+            session.setAttribute("cart", cart);
+            request.getRequestDispatcher("cart.jsp").forward(request, response);
         }
     }
 }

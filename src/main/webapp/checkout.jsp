@@ -12,6 +12,7 @@
     <title>.music</title>
 </head>
 <body>
+<c:set var="items" value="${cart.getCart().keySet().size()}"></c:set>
 <header>
     <nav class="navbar navbar-expand-sm navbar-dark">
         <div class="container-fluid">
@@ -21,7 +22,14 @@
             </a>
             <ul class="nav-item">
                 <li class="navbar-text hoverable"><a class="nav-link" href="Controller?page=index">HOME</a></li>
-                <li class="navbar-text hoverable"><a class="nav-link" href="Controller?page=cart">CART</a></li>
+                <c:choose>
+                    <c:when test="${items >= 1}">
+                        <li class="navbar-text hoverable"><a class="nav-link" href="Controller?page=cart">CART (<c:out value="${items}"></c:out>)</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="navbar-text hoverable"><a class="nav-link" href="Controller?page=cart">CART</a></li>
+                    </c:otherwise>
+                </c:choose>
             </ul>
             <div class="nav_item account-manage">
                 <ul class="nav-item">
