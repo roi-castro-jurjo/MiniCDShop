@@ -48,7 +48,7 @@ public class UserDAO extends DAO {
         }
     }
 
-    public void signup(User user) {
+    public void signUp(User user) {
         Connection connection = this.getConexion();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO \"users\" (name,password,email) VALUES(?,?,?)");

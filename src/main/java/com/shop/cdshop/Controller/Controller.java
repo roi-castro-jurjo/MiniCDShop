@@ -186,7 +186,7 @@ public class Controller extends HttpServlet {
             try {
                 Database database = new Database();
                 UserDAO userDAO = new UserDAO(database.getConnection());
-                userDAO.signup(user);
+                userDAO.signUp(user);
                 database.closeConnection();
             } catch (SQLException | ClassNotFoundException e) {
                 throw new RuntimeException(e);
