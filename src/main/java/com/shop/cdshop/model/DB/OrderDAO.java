@@ -23,7 +23,7 @@ public class OrderDAO extends DAO {
 
         result.next();
 
-        Integer userID = result.getInt(1);
+        int userID = result.getInt(1);
 
         float total = 0;
 

@@ -22,11 +22,4 @@ public class Cart implements Serializable {
         this.cart = cart;
     }
 
-    @Override
-    public String toString() {
-        return "Cart{" +
-                "id=" + id +
-                ", cart=" + cart +
-                "}\n\n";
-    }
 }

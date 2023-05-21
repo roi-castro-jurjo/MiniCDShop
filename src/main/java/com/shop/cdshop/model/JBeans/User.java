@@ -9,7 +9,6 @@ public class User implements Serializable {
     private String password;
     private String cardType;
     private Long cardNumber;
-    private Cart cart;
 
     //getters & setters
     public Integer getId() {
@@ -52,12 +51,5 @@ public class User implements Serializable {
     }
     public void setCardNumber(Long cardNumber) {
         this.cardNumber = cardNumber;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-    public void setCart(Cart cart) {
-        this.cart = cart;
     }
 }
